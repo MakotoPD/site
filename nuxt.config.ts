@@ -58,6 +58,17 @@ export default defineNuxtConfig({
       restrictRuntimeImagesToOrigin: true,
     },
   },
+  hooks: {
+    // The sculpture worker starts when the page is idle. Left alone, Nuxt would preload its
+    // script on every visit, ahead of the content.
+    'build:manifest': (manifest) => {
+      for (const item of Object.values(manifest)) {
+        if (/^sculpture-/.test(item.file)) item.preload = item.prefetch = false
+        item.assets = item.assets?.filter((asset) => !/^sculpture-/.test(asset))
+      }
+    },
+  },
+  // These two files feed the Open Graph image renderer; pages use the WOFF2 fonts from CSS.
   fonts: {
     families: [
       {
@@ -66,6 +77,7 @@ export default defineNuxtConfig({
         weights: [400, 500, 600, 700],
         styles: ['normal'],
         global: true,
+        preload: false,
       },
       {
         name: 'Instrument Serif',
@@ -73,6 +85,7 @@ export default defineNuxtConfig({
         weights: [400],
         styles: ['italic'],
         global: true,
+        preload: false,
       },
     ],
   },
@@ -146,7 +159,14 @@ export default defineNuxtConfig({
       headers: { 'X-Robots-Tag': 'noindex, nofollow', 'Cache-Control': 'private, no-store' },
     },
     '/api/admin/**': { headers: { 'Cache-Control': 'private, no-store' } },
+    // Unhashed static files: rename a file when its content changes.
+    ...Object.fromEntries(
+      ['images', 'fonts', 'brand', 'models'].map((directory) => [
+        `/${directory}/**`,
+        { headers: { 'Cache-Control': 'public, max-age=2592000' } },
+      ]),
+    ),
   },
-  nitro: { preset: 'node-server' },
+  nitro: { preset: 'node-server', compressPublicAssets: true },
   typescript: { strict: true },
 })

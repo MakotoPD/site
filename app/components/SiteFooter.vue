@@ -213,7 +213,13 @@ const { openSettings } = useCookieConsent()
           >
             Panel
           </NuxtLink>
-          <span>Design & code by Makoto ↗</span>
+          <span>
+            Design & code by Makoto
+            <AppIcon
+              name="arrow"
+              class="inline-block h-[1em] w-[1em] align-[-0.12em]"
+            />
+          </span>
         </div>
       </div>
     </div>

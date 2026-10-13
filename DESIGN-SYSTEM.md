@@ -24,7 +24,7 @@ Typografia: Manrope Variable do treści i interfejsu; Instrument Serif italic do
 
 Oryginalny znak i logotyp pochodzą z `Makoto-website/public/logo.png` i są używane bez zmiany kształtu w nagłówku, stopce oraz panelu. Favicon i model 3D również pochodzą z dotychczasowej strony. Interaktywna animacja przedstawia rzeczywisty model znaku Makoto.
 
-Ruch: wejście strony i sekcji przez GSAP, krótkie przejścia kontrolek oraz łagodny ruch logo 3D. `prefers-reduced-motion` usuwa ruch przestrzenny; renderowanie 3D jest wstrzymywane poza widokiem i w nieaktywnej karcie.
+Ruch: wejście sekcji startowej w CSS (`data-hero`, nagłówek tylko się przesuwa, bez zanikania), sekcje przy przewijaniu przez GSAP, krótkie przejścia kontrolek oraz łagodny ruch logo 3D. Logo 3D renderuje się w Web Workerze i startuje dopiero po załadowaniu strony, więc nie blokuje interfejsu. `prefers-reduced-motion` usuwa ruch przestrzenny; renderowanie 3D jest wstrzymywane poza widokiem i w nieaktywnej karcie.
 
 Blog i edytor Tiptap współdzielą `app/assets/css/rich-content.css`: typografię, wyróżnienia, tabele, kod, podpisy zdjęć i listy zadań. TIP i INFO używają baby blue; SUCCESS ma stonowaną zieleń, WARNING bursztyn, a CAUTION czerwień. Kolor sygnalizuje znaczenie bloku, jego nazwa i ikona pozostają czytelne niezależnie od koloru. Wszystkie wyróżnienia używają `--radius-card`, a narzędzia edytora `--radius-control`.
 

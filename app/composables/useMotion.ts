@@ -3,6 +3,7 @@ export function useMotion(root: Ref<HTMLElement | null>) {
   let cleanup: (() => void) | undefined
   let disposed = false
   onMounted(async () => {
+    await afterLoadIdle()
     const [{ gsap }, { ScrollTrigger }] = await Promise.all([
       import('gsap'),
       import('gsap/ScrollTrigger'),
@@ -12,15 +13,9 @@ export function useMotion(root: Ref<HTMLElement | null>) {
     const mm = gsap.matchMedia()
     const context = gsap.context(() => {
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        gsap.from('[data-hero]', {
-          y: 48,
-          opacity: 0,
-          duration: 1,
-          stagger: 0.12,
-          ease: 'power3.out',
-          clearProps: 'all',
-        })
         gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((element) => {
+          // Whatever is already on screen stays put: hiding it now would be a visible flicker.
+          if (element.getBoundingClientRect().top < innerHeight) return
           gsap.from(element, {
             y: 38,
             opacity: 0,

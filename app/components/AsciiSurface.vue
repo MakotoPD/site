@@ -222,8 +222,7 @@ function stop() {
   lens.opacity = 0
   cancelAnimationFrame(frame)
   frame = 0
-  const ctx = canvas.value?.getContext('2d')
-  if (ctx) ctx.clearRect(0, 0, canvas.value!.width, canvas.value!.height)
+  if (cached) clear()
 }
 function imageLoaded() {
   invalidate()
@@ -236,15 +235,30 @@ function imageLoaded() {
       onUpdate: scheduleDraw,
     })
 }
+// Nothing has been drawn until an ASCII image is cached. Creating a 2D context just to clear
+// an empty canvas is slow, and on touch devices the effect never runs at all.
+function clear() {
+  const output = canvas.value
+  output?.getContext('2d')?.clearRect(0, 0, output.width, output.height)
+}
 function invalidate() {
+  if (cached) clear()
   cached = undefined
   ready.value = false
-  const output = canvas.value,
-    ctx = output?.getContext('2d')
-  if (output && ctx) ctx.clearRect(0, 0, output.width, output.height)
+}
+// The lens needs GSAP only where the effect can run at all (mouse, wide screen).
+async function loadMotion() {
+  if (gsap || !enabled.value) return
+  await afterLoadIdle()
+  const module = await import('gsap')
+  if (disposed || gsap) return
+  gsap = module.gsap
+  xTo = gsap.quickTo(lens, 'x', { duration: 0.25, ease: 'power3.out', onUpdate: scheduleDraw })
+  yTo = gsap.quickTo(lens, 'y', { duration: 0.25, ease: 'power3.out', onUpdate: scheduleDraw })
 }
 function updatePreference() {
   enabled.value = !!props.interactive && !!finePointer?.matches && !reduced?.matches
+  loadMotion()
   if (!enabled.value) {
     stop()
     cached = undefined
@@ -254,18 +268,13 @@ function updatePreference() {
 function visibility() {
   if (document.hidden) stop()
 }
-onMounted(async () => {
+onMounted(() => {
   finePointer = matchMedia('(min-width: 761px) and (hover: hover) and (pointer: fine)')
   reduced = matchMedia('(prefers-reduced-motion: reduce)')
   finePointer.addEventListener('change', updatePreference)
   reduced.addEventListener('change', updatePreference)
   document.addEventListener('visibilitychange', visibility)
   updatePreference()
-  const module = await import('gsap')
-  if (disposed) return
-  gsap = module.gsap
-  xTo = gsap.quickTo(lens, 'x', { duration: 0.25, ease: 'power3.out', onUpdate: scheduleDraw })
-  yTo = gsap.quickTo(lens, 'y', { duration: 0.25, ease: 'power3.out', onUpdate: scheduleDraw })
   resize = new ResizeObserver(() => {
     invalidate()
     if (hovering && prepare()) scheduleDraw()

@@ -99,9 +99,9 @@ const services = [
     >
       <SectionLabel
         text="Usługi / Design + Development"
-        data-hero
+        data-hero="0"
       />
-      <h1 data-hero>
+      <h1 data-hero="1">
         Dobry pomysł.
         <br />
         <span
@@ -111,7 +111,7 @@ const services = [
           Właściwe wykonanie.
         </span>
       </h1>
-      <p data-hero>
+      <p data-hero="2">
         Design, technologia i dbałość o szczegóły.
         <br />
         Wszystko, czego potrzebuje Twój cyfrowy projekt.

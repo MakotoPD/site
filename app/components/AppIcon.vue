@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import {
   ArrowUpRight,
+  ArrowLeftRight,
+  Asterisk,
   ArrowRight,
   ArrowDown,
   ArrowLeft,
@@ -49,6 +51,8 @@ import {
 } from '@lucide/vue'
 const icons = {
   arrow: ArrowUpRight,
+  swap: ArrowLeftRight,
+  asterisk: Asterisk,
   right: ArrowRight,
   down: ArrowDown,
   left: ArrowLeft,

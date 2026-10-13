@@ -42,9 +42,9 @@ usePageSeo(
     >
       <SectionLabel
         text="Portfolio / Selected work"
-        data-hero
+        data-hero="0"
       />
-      <h1 data-hero>
+      <h1 data-hero="1">
         Każdy projekt.
         <br />
         <span
@@ -54,7 +54,7 @@ usePageSeo(
           Inna historia.
         </span>
       </h1>
-      <p data-hero>
+      <p data-hero="2">
         Od stron dla małych marek po własne produkty.
         <br />
         Różne wyzwania. Ta sama dbałość o szczegóły.

@@ -37,9 +37,9 @@ useMotion(root)
     >
       <SectionLabel
         text="Blog / Z mojego warsztatu"
-        data-hero
+        data-hero="0"
       />
-      <h1 data-hero>
+      <h1 data-hero="1">
         Myśli, które
         <br />
         <span
@@ -49,7 +49,7 @@ useMotion(root)
           warto rozwinąć.
         </span>
       </h1>
-      <p data-hero>
+      <p data-hero="2">
         O designie, technologii i tym, co dzieje się pomiędzy.
         <br />
         Praktyka, pomysły i rzeczy, których uczę się po drodze.

@@ -571,7 +571,12 @@ function splitTitle(title: string) {
               class="mt-[17px] text-[8px] text-[#8aa9c5] [&_>_span]:px-[9px] [&_>_span]:text-primary"
             >
               Treść
-              <span>↔</span>
+              <span>
+                <AppIcon
+                  name="swap"
+                  class="inline-block h-[1em] w-[1em] align-[-0.12em]"
+                />
+              </span>
               Dane strukturalne
             </div>
           </template>

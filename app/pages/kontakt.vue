@@ -32,9 +32,9 @@ usePageSeo(
     >
       <SectionLabel
         text="Kontakt / Let's make it happen"
-        data-hero
+        data-hero="0"
       />
-      <h1 data-hero>
+      <h1 data-hero="1">
         Wszystko zaczyna się
         <br />
         od
@@ -45,7 +45,7 @@ usePageSeo(
           jednego „hej”.
         </span>
       </h1>
-      <p data-hero>
+      <p data-hero="2">
         Opowiedz mi, co chodzi Ci po głowie.
         <br />
         Razem znajdziemy sposób, żeby to zrealizować.
@@ -114,7 +114,11 @@ usePageSeo(
             target="_blank"
             rel="noopener noreferrer"
           >
-            Profil firmy w Google ↗
+            Profil firmy w Google
+            <AppIcon
+              name="arrow"
+              class="inline-block h-[1em] w-[1em] align-[-0.12em]"
+            />
           </a>
         </address>
         <div

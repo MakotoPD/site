@@ -400,3 +400,43 @@
     }
   }
 }
+
+/* The hero entrance starts with the first paint, so server-rendered content never waits for
+   JavaScript or flashes when it arrives. Headlines only move: fading one would hide the
+   largest text on the page while it loads. */
+@layer base {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-hero] {
+      animation: hero-in 0.9s var(--ease-out) backwards;
+    }
+    h1[data-hero] {
+      animation-name: hero-rise;
+    }
+    [data-hero='1'] {
+      animation-delay: 0.1s;
+    }
+    [data-hero='2'] {
+      animation-delay: 0.2s;
+    }
+    [data-hero='3'] {
+      animation-delay: 0.3s;
+    }
+    [data-hero='4'] {
+      animation-delay: 0.4s;
+    }
+    [data-hero='5'] {
+      animation-delay: 0.5s;
+    }
+  }
+}
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+}
+@keyframes hero-rise {
+  from {
+    transform: translateY(20px);
+  }
+}

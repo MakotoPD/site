@@ -59,7 +59,10 @@ defineProps<{ project: Project; index?: number }>()
           data-ui="art-cross"
           class="absolute [transform:rotate(20deg)] [font-family:serif] text-[280px] text-[#ffffff07]"
         >
-          ✳
+          <AppIcon
+            name="asterisk"
+            :size="280"
+          />
         </div>
       </div>
       <span

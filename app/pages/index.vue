@@ -51,7 +51,7 @@ const faq = [
           flex items-center justify-between pt-[29px] pb-0 max-[760px]:pt-[25px]
           [&_[data-ui~='eyebrow']]:text-[9px]
         "
-        data-hero
+        data-hero="0"
       >
         <span
           data-ui="eyebrow"
@@ -94,21 +94,23 @@ const faq = [
               mb-7 flex items-center gap-[9px] text-[11px] text-[#a1acb9] max-[760px]:mb-5.5
               max-[760px]:text-[10px]
             "
-            data-hero
+            data-hero="1"
           >
             <span
               data-ui="tiny-cross"
-              class="text-[23px] leading-[14px] text-primary"
+              class="text-primary"
             >
-              ✳
+              <AppIcon
+                name="asterisk"
+                :size="15"
+              />
             </span>
             Strony internetowe / Kujawsko-Pomorskie
           </div>
-          <h1>
+          <h1 data-hero="2">
             <span
               data-ui="hero-line"
-              class="block whitespace-nowrap"
-              data-hero
+              class="whitespace-nowrap"
             >
               Strony z
               <span
@@ -118,10 +120,10 @@ const faq = [
                 pomysłem.
               </span>
             </span>
+            <br />
             <span
               data-ui="hero-line"
-              class="block whitespace-nowrap"
-              data-hero
+              class="whitespace-nowrap"
             >
               Kod z
               <span
@@ -138,7 +140,7 @@ const faq = [
               mt-[27px] max-w-[500px] text-[13px] leading-[1.9] text-[#a3acb8]
               max-[960px]:text-[12px] max-[760px]:mt-6 max-[760px]:text-[12px]
             "
-            data-hero
+            data-hero="3"
           >
             Projektuję autorskie strony internetowe i aplikacje
             <br class="desktop-break" />
@@ -164,7 +166,7 @@ const faq = [
               max-[400px]:[&_>_[data-ui~='text-link']]:text-[9px]
               max-[760px]:[&_[data-ui~='text-link']]:text-[11px]
             "
-            data-hero
+            data-hero="4"
           >
             <NuxtLink
               to="/wycena"
@@ -207,7 +209,7 @@ const faq = [
               [&_img]:rounded-[50%] [&_img]:object-cover [&_img]:[filter:saturate(0.7)]
               [&_small]:text-[9px] [&_small]:text-muted
             "
-            data-hero
+            data-hero="5"
           >
             <img
               src="/images/avatar.webp"
@@ -300,7 +302,10 @@ const faq = [
                 data-ui="sculpture-placeholder"
                 class="grid h-full place-items-center text-[300px] text-primary opacity-[0.2]"
               >
-                ✳
+                <AppIcon
+                  name="asterisk"
+                  :size="300"
+                />
               </div>
             </template>
           </ClientOnly>
@@ -464,7 +469,13 @@ const faq = [
           "
         >
           <span>design</span>
-          <span>meets code ↗</span>
+          <span>
+            meets code
+            <AppIcon
+              name="arrow"
+              class="inline-block h-[1em] w-[1em] align-[-0.12em]"
+            />
+          </span>
         </div>
       </div>
       <div
@@ -799,7 +810,11 @@ const faq = [
             data-ui="blue"
             class="text-primary"
           >
-            napisz do mnie ↗
+            napisz do mnie
+            <AppIcon
+              name="arrow"
+              class="inline-block h-[1em] w-[1em] align-[-0.12em]"
+            />
           </NuxtLink>
           .
         </p>

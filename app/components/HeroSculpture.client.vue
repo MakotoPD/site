@@ -1,170 +1,74 @@
 <script setup lang="ts">
 const host = ref<HTMLDivElement | null>(null)
-let dispose: (() => void) | undefined
-let disposed = false
+let dispose: (() => void) | undefined,
+  disposed = false
 onMounted(async () => {
-  const THREE = await import('three')
-  const { RoomEnvironment } = await import('three/examples/jsm/environments/RoomEnvironment.js')
-  const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js')
-  const { gsap } = await import('gsap')
-  if (disposed || !host.value) return
-  let renderer: InstanceType<typeof THREE.WebGLRenderer>
-  try {
-    renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: true,
-      powerPreference: 'low-power',
-    })
-  } catch {
-    return
-  }
+  // The model must not compete with the content for network or CPU. The wait also matters
+  // for correctness: a .client component runs this hook before its template is rendered.
+  await afterLoadIdle()
   const container = host.value
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75))
-  renderer.setClearColor(0x000000, 0)
-  renderer.toneMapping = THREE.ACESFilmicToneMapping
-  renderer.toneMappingExposure = 1.6
-  container.appendChild(renderer.domElement)
-  const scene = new THREE.Scene(),
-    camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100)
-  camera.position.set(0, 0, 9)
-  const pmrem = new THREE.PMREMGenerator(renderer),
-    room = new RoomEnvironment()
-  const environment = pmrem.fromScene(room, 0.04)
-  scene.environment = environment.texture
-  const material = new THREE.MeshPhysicalMaterial({
-    color: 0xb3d7f3,
-    metalness: 1,
-    roughness: 0.19,
-    clearcoat: 1,
-    clearcoatRoughness: 0.15,
-    envMapIntensity: 1.8,
-  })
-  let gltf
-  try {
-    gltf = await new GLTFLoader().loadAsync('/models/makoto.glb')
-  } catch {
-    material.dispose()
-    environment.dispose()
-    room.dispose()
-    pmrem.dispose()
-    renderer.dispose()
-    renderer.domElement.remove()
+  // The scene runs in a worker (app/workers/sculpture.ts). Without OffscreenCanvas the
+  // static fallback below simply stays.
+  if (disposed || !container || !('transferControlToOffscreen' in HTMLCanvasElement.prototype))
     return
-  }
-  if (disposed) {
-    gltf.scene.traverse((node) => {
-      if (node instanceof THREE.Mesh) {
-        node.geometry.dispose()
-        ;(Array.isArray(node.material) ? node.material : [node.material]).forEach((m) =>
-          m.dispose(),
-        )
-      }
-    })
-    material.dispose()
-    environment.dispose()
-    room.dispose()
-    pmrem.dispose()
-    renderer.dispose()
-    renderer.domElement.remove()
-    return
-  }
-  const model = gltf.scene,
-    geometries: InstanceType<typeof THREE.BufferGeometry>[] = []
-  model.traverse((node) => {
-    if (node instanceof THREE.Mesh) {
-      geometries.push(node.geometry)
-      const original = Array.isArray(node.material) ? node.material : [node.material]
-      original.forEach((m) => m.dispose())
-      node.material = material
-    }
-  })
-  const box = new THREE.Box3().setFromObject(model),
-    center = box.getCenter(new THREE.Vector3()),
-    dimensions = box.getSize(new THREE.Vector3())
-  model.position.sub(center)
-  const mesh = new THREE.Group()
-  mesh.add(model)
-  mesh.scale.setScalar(4.5 / Math.max(dimensions.x, dimensions.y))
-  mesh.rotation.set(0.05, -0.15, -0.1)
-  scene.add(mesh)
-  const light = new THREE.DirectionalLight(0xb9dfff, 4)
-  light.position.set(3, 4, 5)
-  scene.add(light)
-  const fill = new THREE.DirectionalLight(0x547ab9, 3)
-  fill.position.set(-4, -2, 1)
-  scene.add(fill)
-  const size = () => {
-    const { width, height } = container.getBoundingClientRect()
-    renderer.setSize(width, height)
-    camera.aspect = width / height
-    camera.updateProjectionMatrix()
-    renderer.render(scene, camera)
-  }
-  const observer = new ResizeObserver(size)
-  observer.observe(container)
-  size()
   const reduce = matchMedia('(prefers-reduced-motion: reduce)')
+  const canvas = document.createElement('canvas')
+  container.appendChild(canvas)
+  const offscreen = canvas.transferControlToOffscreen(),
+    { width, height } = container.getBoundingClientRect()
   let visible = true,
-    frame = 0,
-    last = 0,
-    motionTime = 0
-  const render = (time: number) => {
-    const delta = Math.min((time - last) / 1000, 0.05)
-    last = time
-    if (!reduce.matches) {
-      motionTime += delta
-      mesh.rotation.y = -0.15 + Math.sin(motionTime * 0.35) * 0.16
-      mesh.rotation.z = -0.1 + Math.sin(motionTime * 0.25) * 0.035
-    }
-    renderer.render(scene, camera)
-    if (visible && !document.hidden && !reduce.matches) frame = requestAnimationFrame(render)
-  }
-  const start = () => {
-    cancelAnimationFrame(frame)
-    if (visible && !document.hidden) frame = requestAnimationFrame(render)
-  }
+    worker: Worker | undefined = new Worker(new URL('../workers/sculpture.ts', import.meta.url), {
+      type: 'module',
+    })
+  const run = () =>
+    worker?.postMessage({
+      type: 'run',
+      active: visible && !document.hidden,
+      reduce: reduce.matches,
+    })
+  const observer = new ResizeObserver(() => {
+    const { width, height } = container.getBoundingClientRect()
+    worker?.postMessage({ type: 'size', width, height })
+  })
   const intersection = new IntersectionObserver((entries) => {
     visible = Boolean(entries[0]?.isIntersecting)
-    start()
+    run()
   })
-  intersection.observe(container)
   const move = (event: PointerEvent) => {
     if (reduce.matches || event.pointerType !== 'mouse') return
     const rect = container.getBoundingClientRect()
-    gsap.to(mesh.rotation, {
-      x: 0.05 + ((event.clientY - rect.top) / rect.height - 0.5) * 0.25,
-      duration: 0.5,
-      ease: 'power3.out',
-      overwrite: true,
-    })
-    gsap.to(mesh.position, {
-      x: ((event.clientX - rect.left) / rect.width - 0.5) * 0.25,
-      duration: 0.5,
-      ease: 'power3.out',
-      overwrite: true,
+    worker?.postMessage({
+      type: 'point',
+      x: (event.clientX - rect.left) / rect.width - 0.5,
+      y: (event.clientY - rect.top) / rect.height - 0.5,
     })
   }
-  container.addEventListener('pointermove', move)
-  document.addEventListener('visibilitychange', start)
-  reduce.addEventListener('change', start)
-  container.classList.add('sculpture-ready')
   dispose = () => {
-    cancelAnimationFrame(frame)
     observer.disconnect()
     intersection.disconnect()
     container.removeEventListener('pointermove', move)
-    document.removeEventListener('visibilitychange', start)
-    reduce.removeEventListener('change', start)
-    gsap.killTweensOf(mesh.rotation)
-    gsap.killTweensOf(mesh.position)
-    geometries.forEach((g) => g.dispose())
-    material.dispose()
-    environment.dispose()
-    room.dispose()
-    pmrem.dispose()
-    renderer.dispose()
-    renderer.domElement.remove()
+    document.removeEventListener('visibilitychange', run)
+    reduce.removeEventListener('change', run)
+    worker?.terminate()
+    worker = undefined
+    canvas.remove()
   }
+  // Any failure (no usable GPU, model not loaded) leaves the fallback image in place.
+  worker.onmessage = ({ data }) => {
+    if (data.type === 'ready') container.classList.add('sculpture-ready')
+    else dispose?.()
+  }
+  worker.onerror = () => dispose?.()
+  worker.postMessage(
+    { type: 'init', canvas: offscreen, width, height, ratio: Math.min(devicePixelRatio, 1.75) },
+    [offscreen],
+  )
+  run()
+  observer.observe(container)
+  intersection.observe(container)
+  container.addEventListener('pointermove', move)
+  document.addEventListener('visibilitychange', run)
+  reduce.addEventListener('change', run)
 })
 onBeforeUnmount(() => {
   disposed = true

@@ -31,9 +31,9 @@ usePageSeo(
     >
       <SectionLabel
         text="O mnie / Behind the screen"
-        data-hero
+        data-hero="0"
       />
-      <h1 data-hero>
+      <h1 data-hero="1">
         Hej, jestem Patryk.
         <br />
         <span

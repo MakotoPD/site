@@ -52,7 +52,7 @@ useMotion(root)
           [&_svg]:[transition:transform_0.25s_var(--ease-out)]
           pointer-hover:[&:hover_svg]:[transform:translate(2px,_-2px)]
         "
-        data-hero
+        data-hero="0"
       >
         <AppIcon
           name="left"
@@ -63,11 +63,11 @@ useMotion(root)
       <p
         data-ui="eyebrow"
         class="flex items-center gap-[9px] text-[10px] font-medium tracking-[0.1em] text-muted uppercase"
-        data-hero
+        data-hero="1"
       >
         {{ project.category }}
       </p>
-      <h1 data-hero>
+      <h1 data-hero="2">
         {{ project.title }}
         <span
           data-ui="blue"
@@ -76,7 +76,7 @@ useMotion(root)
           .
         </span>
       </h1>
-      <p data-hero>{{ project.description }}</p>
+      <p data-hero="3">{{ project.description }}</p>
     </header>
     <div
       data-ui="case-image"
@@ -100,12 +100,10 @@ useMotion(root)
       />
       <span v-else>
         {{ project.title }}
-        <span
-          data-ui="serif"
-          class="font-serif font-normal tracking-[-0.025em] italic"
-        >
-          ↗
-        </span>
+        <AppIcon
+          name="arrow"
+          class="inline-block h-[1em] w-[1em] align-[-0.12em]"
+        />
       </span>
     </div>
     <section

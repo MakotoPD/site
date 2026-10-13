@@ -73,9 +73,9 @@ useMotion(root)
     >
       <SectionLabel
         :text="`${city.name} / Design + Development`"
-        data-hero
+        data-hero="0"
       />
-      <h1 data-hero>
+      <h1 data-hero="1">
         Strony internetowe
         <br />
         <span
@@ -85,7 +85,7 @@ useMotion(root)
           {{ city.name }}.
         </span>
       </h1>
-      <p data-hero>{{ city.lead }}</p>
+      <p data-hero="2">{{ city.lead }}</p>
       <div
         data-ui="local-heading-actions"
         class="
@@ -93,7 +93,7 @@ useMotion(root)
           max-[760px]:[&_[data-ui~='button']]:px-5
           max-[760px]:[&_[data-ui~='button']]:text-[11px] [&_[data-ui~='text-link']]:mb-0
         "
-        data-hero
+        data-hero="3"
       >
         <NuxtLink
           :to="`/wycena?project=website&city=${city.slug}`"
@@ -249,7 +249,11 @@ useMotion(root)
             target="_blank"
             rel="noopener noreferrer"
           >
-            {{ city.source.title }} ↗
+            {{ city.source.title }}
+            <AppIcon
+              name="arrow"
+              class="inline-block h-[1em] w-[1em] align-[-0.12em]"
+            />
           </a>
         </div>
       </div>

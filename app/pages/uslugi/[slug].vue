@@ -78,9 +78,9 @@ useMotion(root)
     >
       <SectionLabel
         text="Usługi / Kujawsko-Pomorskie"
-        data-hero
+        data-hero="0"
       />
-      <h1 data-hero>
+      <h1 data-hero="1">
         {{ service.title }}
         <span
           data-ui="serif blue"
@@ -89,7 +89,7 @@ useMotion(root)
           .
         </span>
       </h1>
-      <p data-hero>{{ service.lead }}</p>
+      <p data-hero="2">{{ service.lead }}</p>
       <div
         data-ui="local-heading-actions"
         class="
@@ -97,7 +97,7 @@ useMotion(root)
           max-[760px]:[&_[data-ui~='button']]:px-5
           max-[760px]:[&_[data-ui~='button']]:text-[11px] [&_[data-ui~='text-link']]:mb-0!
         "
-        data-hero
+        data-hero="3"
       >
         <NuxtLink
           :to="service.project ? `/wycena?project=${service.project}` : '/kontakt'"

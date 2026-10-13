@@ -25,7 +25,7 @@ Nuxt 4.6.1 i Nuxt SEO 6.0.1: sitemap z aktualnie opublikowanymi wpisami PostgreS
 
 Oryginalne logo, favicon i model 3D Makoto są używane na stronie oraz w panelu. System zaokrągleń i tokenów opisuje [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md).
 
-- Strona główna: sekwencja wejścia GSAP, animacje sekcji przy przewijaniu, paralaksa zdjęć, interaktywny obiekt 3D, responsywna nawigacja, FAQ.
+- Strona główna: sekwencja wejścia w CSS (od pierwszego wyrenderowania, bez czekania na JavaScript), animacje sekcji przy przewijaniu (GSAP, uruchamiane po załadowaniu strony), paralaksa zdjęć, interaktywny obiekt 3D renderowany w Web Workerze (`app/workers/sculpture.ts`), responsywna nawigacja, FAQ.
 - Usługi: asymetryczna siatka dużych fotografii, osobne linki do usług i soczewka ASCII pod kursorem. Baner wyceny ma fotograficzną fakturę wody. Zdjęcia Unsplash są serwowane lokalnie jako responsywny WebP i wczytywane leniwie; źródła i licencja: `public/images/editorial/sources.json`. Na telefonie i przy ograniczonym ruchu efekt ASCII jest wyłączony.
 - Oferta, portfolio z filtrami i podstronami projektów, o mnie i kontakt.
 - Kalkulator: wybór celu rozwija dopasowane pytania w tym samym widoku. Pomoc w doborze projektu, czytelny zakres landing page i strony firmowej, odpowiedzi „Nie wiem jeszcze” oraz formularz bez konieczności wyboru typu strony. Wycena zmienia się na bieżąco i jest ponownie liczona na serwerze; opieka miesięczna jest osobno. Konfiguracja i sprawy do omówienia zapisują się w panelu oraz eksporcie CSV. Przy zmianie typu projektu dodatki są resetowane, aby ukryte opcje nie wpływały na kwotę.

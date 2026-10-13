@@ -70,9 +70,9 @@ useMotion(root)
     >
       <SectionLabel
         text="Kujawsko-Pomorskie / Z pomysłem, blisko Ciebie"
-        data-hero
+        data-hero="0"
       />
-      <h1 data-hero>
+      <h1 data-hero="1">
         Strony internetowe
         <br />
         <span
@@ -82,7 +82,7 @@ useMotion(root)
           Kujawsko-Pomorskie.
         </span>
       </h1>
-      <p data-hero>
+      <p data-hero="2">
         Makoto — Patryk Dąbrowski — projektuje strony, sklepy i aplikacje dla firm z Inowrocławia,
         Torunia, Bydgoszczy, Grudziądza i Włocławka. Współpracuję również z przedsiębiorcami z
         mniejszych miejscowości całego województwa.
@@ -94,7 +94,7 @@ useMotion(root)
           max-[760px]:[&_[data-ui~='button']]:px-5
           max-[760px]:[&_[data-ui~='button']]:text-[11px] [&_[data-ui~='text-link']]:mb-0
         "
-        data-hero
+        data-hero="3"
       >
         <NuxtLink
           to="/wycena"
