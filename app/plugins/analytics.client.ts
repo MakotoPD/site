@@ -7,7 +7,8 @@ declare global {
 }
 export default defineNuxtPlugin((nuxtApp) => {
   const trackers = window as unknown as {
-    umami?: { track: (payload: Record<string, unknown>) => void }
+    // The function form extends Umami's own payload (hostname, referrer, screen, language).
+    umami?: { track: (payload: (props: Record<string, unknown>) => unknown) => void }
   }
   const config = useRuntimeConfig(),
     router = useRouter()
@@ -72,7 +73,7 @@ export default defineNuxtPlugin((nuxtApp) => {
           send_to: settings.gaId,
         })
       if (loaded.has('makoto-umami') && trackers.umami && changed('umami'))
-        trackers.umami.track({ website: settings.umamiId, url: path, title })
+        trackers.umami.track((props) => ({ ...props, url: path, title }))
     }
   }
   function applyConsent() {
@@ -93,13 +94,13 @@ export default defineNuxtPlugin((nuxtApp) => {
           pageview,
         )
       }
-      if (settings.umamiId)
+      if (settings.umamiId && settings.umamiSrc)
         inject(
           'makoto-umami',
-          'https://cloud.umami.is/script.js',
+          settings.umamiSrc,
           {
             'data-website-id': settings.umamiId,
-            'data-auto-pageview': 'false',
+            'data-auto-track': 'false',
             'data-exclude-search': 'true',
             'data-exclude-hash': 'true',
           },
@@ -126,12 +127,12 @@ export default defineNuxtPlugin((nuxtApp) => {
           if (loaded.has('makoto-ga'))
             window.gtag('event', 'generate_lead', { form_type: source, send_to: settings.gaId })
           if (loaded.has('makoto-umami'))
-            trackers.umami?.track({
-              website: settings.umamiId,
+            trackers.umami?.track((props) => ({
+              ...props,
               url: path,
               name: 'generate_lead',
               data: { form_type: source },
-            })
+            }))
         }
       },
     },

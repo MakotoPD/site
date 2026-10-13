@@ -140,8 +140,8 @@ usePageSeo(
           Google Ireland Limited — skrzynka Gmail, na którą trafia kopia powiadomienia o zgłoszeniu;
         </li>
         <li>
-          po Twojej zgodzie: Google Ireland Limited (Google Analytics 4) oraz Umami Software, Inc.
-          (Umami);
+          po Twojej zgodzie: Google Ireland Limited (Google Analytics 4). Statystyki Umami zbiera
+          moja własna instancja na tych samych serwerach, bez zewnętrznego dostawcy;
         </li>
         <li>
           w razie współpracy — podmioty obsługujące rozliczenia, a także organy uprawnione na
@@ -155,7 +155,7 @@ usePageSeo(
       </p>
       <h2>Przekazywanie danych poza EOG</h2>
       <p>
-        Cloudflare, Google i Umami mogą przetwarzać dane także w Stanach Zjednoczonych. Podstawą
+        Cloudflare i Google mogą przetwarzać dane także w Stanach Zjednoczonych. Podstawą
         przekazania jest decyzja Komisji Europejskiej z 10 lipca 2023 r. o odpowiednim stopniu
         ochrony (EU–US Data Privacy Framework) wobec podmiotów, które do tego programu przystąpiły,
         a w pozostałych przypadkach standardowe klauzule umowne. O kopię stosowanych zabezpieczeń
@@ -243,7 +243,8 @@ usePageSeo(
         </li>
         <li>
           <strong>Umami</strong>
-          — analityczny, nie zapisuje plików cookie. Uruchamiany tylko po zgodzie na analitykę.
+          — analityczny, na moim własnym serwerze. Nie zapisuje plików cookie i jest uruchamiany
+          tylko po zgodzie na analitykę.
         </li>
       </ul>
       <p>
@@ -286,21 +287,13 @@ usePageSeo(
         automatycznie danych już przekazanych dostawcy.
       </p>
       <p>
-        Informacje dostawców:
+        Informacje dostawcy:
         <a
           href="https://policies.google.com/privacy"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Google
-        </a>
-        oraz
-        <a
-          href="https://umami.is/privacy"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Umami
+          polityka prywatności Google
         </a>
       </p>
       <h2>Zasady korzystania ze strony</h2>

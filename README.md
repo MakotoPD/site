@@ -79,7 +79,7 @@ Serwer sprawdza strukturę, dozwolone bloki/formatowanie, adresy i limity treśc
 
 ## Analityka, zgody i Turnstile
 
-Przeniesione identyfikatory: GA4 G-7P472XF9TT, Umami 84056d40-a170-4a24-9d8a-e10d2144dd7e (cloud.umami.is). Meta Pixel i Google Tag Manager zostały usunięte; strona nie ma kategorii marketingowej. AdSense znaleziony w starym kodzie służy reklamom; nie został dodany do nowego projektu.
+Przeniesione identyfikatory: GA4 G-7P472XF9TT, Umami 63fb127b-613f-4455-b6a4-82e4f7ae3581 na własnej instancji (`analytics.makoto.com.pl`, zmienna `NUXT_PUBLIC_ANALYTICS_UMAMI_SRC`; jej host trafia automatycznie do CSP). Meta Pixel i Google Tag Manager zostały usunięte; strona nie ma kategorii marketingowej. AdSense znaleziony w starym kodzie służy reklamom; nie został dodany do nowego projektu.
 
 GA4 i Umami uruchamiają się po zgodzie na analitykę. Basic Consent Mode v2 domyślnie odmawia wszystkich sygnałów, a sygnały reklamowe pozostają odrzucone zawsze. Nie ma żądań do trackerów przed zgodą. Cookie cookie_consent zachowuje zgodność z dotychczasowym formatem i pamięta wybór na rok. Link w stopce i polityce prywatności otwiera dostępne z klawiatury okno ustawień. Cofnięcie zgody czyści znane cookies trackerów i przeładowuje stronę, usuwając ich kod z pamięci.
 

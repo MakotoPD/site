@@ -134,7 +134,8 @@ export default defineNuxtConfig({
       analytics: {
         enabled: true,
         gaId: 'G-7P472XF9TT',
-        umamiId: '84056d40-a170-4a24-9d8a-e10d2144dd7e',
+        umamiId: '63fb127b-613f-4455-b6a4-82e4f7ae3581',
+        umamiSrc: 'https://analytics.makoto.com.pl/script.js',
       },
     },
   },

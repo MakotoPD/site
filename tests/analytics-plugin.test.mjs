@@ -23,7 +23,7 @@ function harness(path = '/', hostname = 'makoto.com.pl') {
     dataLayer: [],
     umami: {
       track(payload) {
-        umami.push(payload)
+        umami.push(payload({ website: 'site-id', hostname: 'makoto.com.pl' }))
       },
     },
   }
@@ -39,7 +39,8 @@ function harness(path = '/', hostname = 'makoto.com.pl') {
       analytics: {
         enabled: true,
         gaId: 'G-7P472XF9TT',
-        umamiId: '84056d40-a170-4a24-9d8a-e10d2144dd7e',
+        umamiId: '63fb127b-613f-4455-b6a4-82e4f7ae3581',
+        umamiSrc: 'https://analytics.makoto.com.pl/script.js',
       },
     },
   }
@@ -129,6 +130,12 @@ test('production tracking waits for the right category and counts SPA pageviews 
   assert.equal(gaLead[2].form_type, 'calculator')
   assert.deepEqual(Object.keys(gaLead[2]).sort(), ['form_type', 'send_to'])
   assert.equal(h.umami.at(-1).name, 'generate_lead')
+  // Umami's own payload is kept, so hostname and referrer reach the statistics.
+  assert.equal(h.umami.at(-1).hostname, 'makoto.com.pl')
+  assert.equal(
+    h.scripts.find((s) => s.id === 'makoto-umami').src,
+    'https://analytics.makoto.com.pl/script.js',
+  )
   const previousCount = h.ga.length + h.umami.length
   h.agree(false)
   h.plugin.provide.trackLead('contact')
