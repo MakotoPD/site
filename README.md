@@ -65,7 +65,7 @@ Po publikacji ustaw `NUXT_PUBLIC_INDEXABLE=true`. Domyślne `false` zapobiega in
 
 Backup PostgreSQL wykonuj przez `pg_dump` i sprawdzaj odtwarzanie kopii. Zachowaj również obiekty z prefiksu R2 nowej strony; backup samej bazy nie zawiera zdjęć ani PDF-ów. Nie usuwaj wolumenu PostgreSQL przez `docker compose down -v`, jeśli chcesz zachować dane. Dane klientów są prywatne.
 
-Zgłoszenia trafiają do panelu i są automatycznie usuwane po 3 latach od ostatniej aktualizacji (przy starcie serwera i raz na dobę). Zdjęcia wgrywane w panelu są zapisywane bez metadanych EXIF. Powiadomienia e-mail nie są podłączone do usługi pocztowej. Stawki kalkulatora są propozycją startową — dostosuj je w panelu. Przed publiczną publikacją dopasuj również informacje o prywatności do faktycznego hostingu i okresu przechowywania danych.
+Zgłoszenia trafiają do panelu, a po ustawieniu zmiennych `NUXT_SMTP_*` serwer wysyła też powiadomienie e-mail o każdym nowym zgłoszeniu (odpowiedź na nie trafia do klienta). Błąd poczty nie blokuje formularza: zgłoszenie jest już zapisane, a przyczyna trafia do logu serwera. Zgłoszenia są automatycznie usuwane po 3 latach od ostatniej aktualizacji (przy starcie serwera i raz na dobę). Zdjęcia wgrywane w panelu są zapisywane bez metadanych EXIF. Stawki kalkulatora są propozycją startową — dostosuj je w panelu. Przed publiczną publikacją dopasuj również informacje o prywatności do faktycznego hostingu i okresu przechowywania danych.
 
 ## Edycja bloga
 

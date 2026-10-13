@@ -46,6 +46,8 @@ const environment = {
   NUXT_DATABASE_URL: databaseUrl,
   NUXT_DATABASE_SCHEMA: schema,
   NUXT_R2_PREFIX: prefix,
+  // Test leads must never reach a real inbox.
+  NUXT_SMTP_HOST: '',
   NUXT_ADMIN_EMAIL: 'test@example.com',
   NUXT_ADMIN_PASSWORD_HASH: salt + ':' + scryptSync(password, salt, 64).toString('hex'),
 }

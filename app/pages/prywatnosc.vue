@@ -123,9 +123,9 @@ usePageSeo(
       </p>
       <h2>Kto ma dostęp do danych?</h2>
       <p>
-        Zgłoszenia są przechowywane w bazie danych strony. Dostęp do nich mam tylko ja, po
-        zalogowaniu do panelu. Danych nie sprzedaję. Odbiorcami mogą być wyłącznie podmioty, z
-        których usług korzystam:
+        Zgłoszenia są przechowywane w bazie danych strony, a ich kopię dostaję e-mailem. Dostęp do
+        nich mam tylko ja. Danych nie sprzedaję. Odbiorcami mogą być wyłącznie podmioty, z których
+        usług korzystam:
       </p>
       <ul>
         <li>
@@ -135,6 +135,9 @@ usePageSeo(
         <li>
           Cloudflare, Inc. — sieć pośrednicząca w ruchu do strony (CDN i ochrona przed atakami),
           zabezpieczenie formularzy (Turnstile) i przechowywanie plików bloga (R2);
+        </li>
+        <li>
+          Google Ireland Limited — skrzynka Gmail, na którą trafia kopia powiadomienia o zgłoszeniu;
         </li>
         <li>
           po Twojej zgodzie: Google Ireland Limited (Google Analytics 4) oraz Umami Software, Inc.

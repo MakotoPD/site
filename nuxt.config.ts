@@ -111,6 +111,7 @@ export default defineNuxtConfig({
       prefix: 'makoto-studio',
     },
     turnstile: { secretKey: '' },
+    smtp: { host: '', port: 587, user: '', password: '', to: '' },
     public: {
       siteUrl: 'https://makoto.com.pl',
       indexable: false,

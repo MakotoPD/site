@@ -45,6 +45,10 @@ export default defineEventHandler(async (event) => {
     updatedAt: now,
   }
   await sql('INSERT INTO leads VALUES($1,$2::jsonb,$3)', [lead.id, JSON.stringify(lead), now])
+  // The lead is already stored, so a mail outage must not reject the form.
+  notifyLead(lead).catch((error) =>
+    console.error('Powiadomienie e-mail o zgłoszeniu nie wyszło:', error?.message || error),
+  )
   setResponseStatus(event, 201)
   return { success: true, id: lead.id }
 })
