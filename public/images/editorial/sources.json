@@ -1,0 +1,86 @@
+{
+  "license": "https://unsplash.com/license",
+  "verified": "2026-10-13",
+  "assets": [
+    {
+      "name": "architecture",
+      "id": "photo-1561103547-564d4edbb64b",
+      "author": "Benoit Beaumatin",
+      "source": "https://unsplash.com/photos/gray-concrete-spiral-stairs-with-no-people-xdai21Y9pek",
+      "files": [
+        {
+          "name": "architecture-640.webp",
+          "bytes": 45620,
+          "width": 640,
+          "height": 427
+        },
+        {
+          "name": "architecture-1280.webp",
+          "bytes": 134974,
+          "width": 1280,
+          "height": 853
+        }
+      ]
+    },
+    {
+      "name": "systems",
+      "id": "photo-1448459322288-678e8f2bb7f9",
+      "author": "Étienne Beauregard-Riverin",
+      "source": "https://unsplash.com/photos/architectural-photography-of-blue-glass-building-yA-WIoC-wiA",
+      "files": [
+        {
+          "name": "systems-640.webp",
+          "bytes": 24816,
+          "width": 640,
+          "height": 518
+        },
+        {
+          "name": "systems-1280.webp",
+          "bytes": 76572,
+          "width": 1280,
+          "height": 1037
+        }
+      ]
+    },
+    {
+      "name": "form",
+      "id": "photo-1741680581152-8ac5fb23ef47",
+      "author": "Pawel Czerwinski",
+      "source": "https://unsplash.com/photos/abstract-white-folds-create-a-minimalist-design-TtAoOVEXgMw",
+      "files": [
+        {
+          "name": "form-640.webp",
+          "bytes": 3260,
+          "width": 640,
+          "height": 427
+        },
+        {
+          "name": "form-1280.webp",
+          "bytes": 10426,
+          "width": 1280,
+          "height": 853
+        }
+      ]
+    },
+    {
+      "name": "water",
+      "id": "photo-1764386240886-4324d8686ad6",
+      "author": "DL314 Lin",
+      "source": "https://unsplash.com/photos/ripples-on-the-surface-of-dark-blue-water-7Oqq6Uvt1tg",
+      "files": [
+        {
+          "name": "water-960.webp",
+          "bytes": 48102,
+          "width": 960,
+          "height": 480
+        },
+        {
+          "name": "water-1920.webp",
+          "bytes": 121302,
+          "width": 1920,
+          "height": 960
+        }
+      ]
+    }
+  ]
+}

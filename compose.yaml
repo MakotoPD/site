@@ -1,0 +1,23 @@
+# Local development database only (npm run db:start).
+# Production runs from the Dockerfile and connects to an existing database through NUXT_DATABASE_URL.
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: makoto-studio-postgres
+    restart: unless-stopped
+    ports:
+      - '127.0.0.1:5434:5432'
+    environment:
+      POSTGRES_DB: makoto_studio
+      POSTGRES_USER: makoto_studio
+      POSTGRES_PASSWORD: ${MAKOTO_POSTGRES_PASSWORD:?Set MAKOTO_POSTGRES_PASSWORD in .env}
+    volumes:
+      - makoto-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U makoto_studio -d makoto_studio']
+      interval: 5s
+      timeout: 3s
+      retries: 15
+volumes:
+  makoto-postgres:
+    name: makoto-studio-postgres-data
