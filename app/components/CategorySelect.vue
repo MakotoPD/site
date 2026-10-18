@@ -17,9 +17,13 @@ const search = ref(''),
     const value = search.value.trim()
     return value.length >= 2 && !props.options.includes(value) ? value : ''
   })
+// Reka only catches Enter while an option is highlighted; otherwise Enter submits the form.
+const root = useTemplateRef<{ highlightFirstItem?: () => void }>('root')
+watch(search, () => nextTick(() => root.value?.highlightFirstItem?.()))
 </script>
 <template>
   <ComboboxRoot
+    ref="root"
     v-model="model"
     open-on-click
   >
@@ -30,6 +34,7 @@ const search = ref(''),
         placeholder="Wybierz lub wpisz nową"
         maxlength="60"
         required
+        @keydown.enter.prevent
       />
       <ComboboxTrigger
         class="absolute right-0 bottom-0 grid h-[43px] w-10 place-items-center text-[#94a8c1]"
