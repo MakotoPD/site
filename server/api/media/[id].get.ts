@@ -12,8 +12,8 @@ export default defineEventHandler(async (event) => {
   const published = !!(
     await sql(
       `SELECT 1 FROM post_media m JOIN posts p ON p.id=m.post_id WHERE m.media_id=$1 AND p.value->>'status'='published'
-      UNION ALL SELECT 1 FROM portfolio WHERE value @> $2::jsonb LIMIT 1`,
-      [id, JSON.stringify([{ image: '/api/media/' + id }])],
+      UNION ALL SELECT 1 FROM portfolio WHERE strpos(value::text, $2) > 0 LIMIT 1`,
+      [id, '/api/media/' + id],
     )
   ).rowCount
   if (!published) {

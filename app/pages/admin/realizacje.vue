@@ -1,9 +1,21 @@
 <script setup lang="ts">
 import type { Project } from '#shared/types'
+import { emptyDocument, normalizeRichDocument, type RichNode } from '#shared/rich-content'
+import { markdownToDocument } from '#shared/markdown'
 definePageMeta({ layout: 'admin', middleware: 'admin' })
 useHead({ title: 'Realizacje — Makoto Studio' })
-const { data } = await useFetch('/api/projects', { default: () => [] })
-const items = ref<Project[]>(structuredClone(toRaw(data.value)))
+const { data } = await useFetch('/api/admin/projects', { default: () => [] })
+const items = ref<(Project & { document: RichNode })[]>(
+  structuredClone(toRaw(data.value)).map((project) => ({
+    ...project,
+    document: project.document || normalizeRichDocument(markdownToDocument(project.detail)),
+  })),
+)
+const categories = computed(() =>
+  [...new Set(items.value.map((p) => p.category).filter(Boolean))].sort((a, b) =>
+    a.localeCompare(b, 'pl'),
+  ),
+)
 const pending = ref(false),
   uploading = ref(-1),
   toast = useToast()
@@ -11,9 +23,10 @@ function add() {
   items.value.push({
     slug: '',
     title: '',
-    category: 'Strona / ',
+    category: '',
     description: '',
     detail: '',
+    document: emptyDocument(),
     image: '',
     color: '#203044',
     technologies: [],
@@ -45,7 +58,7 @@ async function upload(event: Event, index: number) {
 async function save() {
   pending.value = true
   try {
-    items.value = await $fetch<Project[]>('/api/admin/projects', {
+    await $fetch<Project[]>('/api/admin/projects', {
       method: 'PUT',
       body: items.value,
     })
@@ -194,12 +207,9 @@ async function save() {
         </label>
         <label>
           Kategoria
-          <input
+          <CategorySelect
             v-model="project.category"
-            required
-            minlength="2"
-            maxlength="60"
-            placeholder="Strona / Portfolio"
+            :options="categories"
           />
         </label>
         <label>
@@ -232,16 +242,16 @@ async function save() {
             placeholder="https://…"
           />
         </label>
-        <label class="col-span-full">
-          Opis projektu
-          <textarea
-            v-model="project.detail"
-            rows="4"
-            required
-            minlength="10"
-            maxlength="2000"
-          />
-        </label>
+        <div class="col-span-full text-[10px] [&_[data-ui~='rich-editor-content']]:min-h-[220px]">
+          Opis projektu (podstrona realizacji)
+          <ClientOnly>
+            <RichTextEditor
+              v-model="project.document"
+              class="mt-2.5"
+              @error="toast.show($event, true)"
+            />
+          </ClientOnly>
+        </div>
         <label>
           Kolor tła
           <input

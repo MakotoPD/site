@@ -90,4 +90,5 @@ export interface Project {
   technologies: string[]
   url?: string
   detail: string
+  document?: RichNode
 }

@@ -6,6 +6,7 @@ import { randomBytes, scryptSync } from 'node:crypto'
 import pg from 'pg'
 import sharp from 'sharp'
 import { createObjectStore } from '../server/storage/objects.ts'
+import { markdownToDocument } from '../shared/markdown.ts'
 import {
   turnstileTestSecretKey,
   turnstileTestSiteKey,
@@ -444,7 +445,15 @@ try {
   const portfolio = (await request('/api/projects', 'GET', undefined, false)).data
   assert.equal(portfolio[0].slug, 'spectra')
   assert.equal((await request('/api/admin/projects', 'PUT', portfolio, false)).status, 401)
-  const work = [...portfolio, { ...portfolio[1], slug: 'integration-work', image: mediaURL }]
+  const work = [
+    ...portfolio,
+    {
+      ...portfolio[1],
+      slug: 'integration-work',
+      image: mediaURL,
+      document: markdownToDocument('**Opis z edytora.**'),
+    },
+  ]
   assert.equal((await request('/api/admin/projects', 'PUT', [...work, portfolio[0]])).status, 400)
   assert.equal(
     (await request('/api/admin/projects', 'PUT', [{ ...work[0], url: 'javascript:alert(1)' }]))
@@ -453,6 +462,10 @@ try {
   )
   assert.equal((await request('/api/admin/projects', 'PUT', work)).status, 200)
   assert.equal((await fetch(origin + mediaURL)).status, 200)
+  assert.match(
+    (await request('/api/projects/integration-work', 'GET', undefined, false)).data.html,
+    /<strong>Opis z edytora\.<\/strong>/,
+  )
   assert.match((await request('/realizacje', 'GET', undefined, false)).data, /integration-work/)
   assert.equal(
     (await request('/work/integration-work', 'GET', undefined, false)).response.headers.get(

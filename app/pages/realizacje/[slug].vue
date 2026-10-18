@@ -2,11 +2,11 @@
 import { siteOrigin } from '#shared/seo'
 const route = useRoute()
 const site = siteOrigin(useRuntimeConfig().public.siteUrl)
-const { data } = await useFetch('/api/projects', { default: () => [] })
-const projects = data.value
-const project = projects.find((p) => p.slug === route.params.slug)
-if (!project) throw createError({ statusCode: 404, statusMessage: 'Nie znaleziono projektu.' })
-const next = projects[(projects.findIndex((p) => p.slug === project.slug) + 1) % projects.length]!
+const { data, error } = await useFetch(`/api/projects/${route.params.slug}`)
+if (error.value || !data.value)
+  throw createError({ statusCode: 404, statusMessage: 'Nie znaleziono projektu.' })
+const project = data.value,
+  next = project.next
 usePageSeo(project.title, project.description)
 useStructuredData('makoto-project', () => ({
   '@context': 'https://schema.org',
@@ -111,8 +111,8 @@ useMotion(root)
       data-ui="case-details"
       class="
         grid grid-cols-2 gap-25 py-22.5 max-[760px]:grid-cols-1 max-[760px]:gap-7.5
-        max-[760px]:py-[55px] [&_[data-ui~='text-link']]:flex [&_h2]:text-[46px]
-        max-[760px]:[&_h2]:text-[40px] [&_p]:text-[14px] [&_p]:text-[#a1acba]
+        max-[760px]:py-[55px] [&_>_div_>_h2]:text-[46px] max-[760px]:[&_>_div_>_h2]:text-[40px]
+        [&_[data-ui~='text-link']]:flex [&_p]:text-[14px] [&_p]:text-[#a1acba]
         max-[760px]:[&_p]:text-[12px]
       "
       data-reveal
@@ -131,7 +131,11 @@ useMotion(root)
         </h2>
       </div>
       <div>
-        <p>{{ project.detail }}</p>
+        <div
+          data-ui="prose rich-content"
+          class="prose rich-content [&_>_:first-child]:mt-0"
+          v-html="project.html"
+        />
         <div
           data-ui="case-tech"
           class="
