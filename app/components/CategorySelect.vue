@@ -52,6 +52,7 @@ watch(
     <ComboboxPortal>
       <ComboboxContent
         position="popper"
+        hide-when-empty
         :side-offset="6"
         class="
           z-50 max-h-[min(280px,var(--reka-combobox-content-available-height))]
@@ -78,8 +79,10 @@ watch(
               />
             </ComboboxItemIndicator>
           </ComboboxItem>
+          <!-- Reka reads textValue once, on mount; the key remounts it for every new search. -->
           <ComboboxItem
             v-if="created"
+            :key="created"
             :value="created"
             :text-value="search"
             class="
