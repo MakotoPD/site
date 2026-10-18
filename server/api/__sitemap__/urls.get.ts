@@ -1,4 +1,3 @@
-import { projects } from '#shared/defaults'
 import { locations, localPath } from '#shared/locations'
 import { servicePages, servicePath } from '#shared/services'
 import { indexingEnabled, siteOrigin, seoRoutes } from '#shared/seo'
@@ -9,7 +8,8 @@ export default defineSitemapEventHandler(async () => {
   const config = useRuntimeConfig().public
   if (!indexingEnabled(config.indexable)) return []
   const site = siteOrigin(config.siteUrl)
-  const posts = (await allPosts()).filter((post) => post.status === 'published')
+  const [records, projects] = await Promise.all([allPosts(), allProjects()])
+  const posts = records.filter((post) => post.status === 'published')
   return [
     ...seoRoutes.map((loc) => ({ loc })),
     ...locations.map((city) => ({ loc: localPath(city.slug) })),

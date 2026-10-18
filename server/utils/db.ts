@@ -1,11 +1,11 @@
 import pg, { type PoolClient, type QueryResultRow } from 'pg'
 import { env } from 'node:process'
 import { randomUUID } from 'node:crypto'
-import { defaultSettings } from '#shared/defaults'
+import { defaultSettings, projects } from '#shared/defaults'
 import seeds from '../data/seed.json'
 import legacyArticles from '../data/legacy-articles.json'
 import { safeSchema, schemaDDL } from '../database/schema'
-import type { Lead, Post, SiteSettings } from '#shared/types'
+import type { Lead, Post, Project, SiteSettings } from '#shared/types'
 let pool: pg.Pool | undefined, initialization: Promise<void> | undefined
 // Retention promised in the privacy policy. Both conditions must hold, so a lead with a
 // damaged updatedAt is never removed before it is three years old. ISO dates compare as text.
@@ -21,6 +21,9 @@ async function initialize(database: pg.Pool) {
     await client.query(schemaDDL(schema))
     await client.query('INSERT INTO settings VALUES(1,$1::jsonb) ON CONFLICT(id) DO NOTHING', [
       JSON.stringify(defaultSettings),
+    ])
+    await client.query('INSERT INTO portfolio VALUES(1,$1::jsonb) ON CONFLICT(id) DO NOTHING', [
+      JSON.stringify(projects),
     ])
     await client.query(expiredLeadsSQL)
     const version = hashToken(config.adminPasswordHash + ':' + config.adminEmail)
@@ -137,6 +140,11 @@ export async function closeDatabase() {
 export async function getSettings(): Promise<SiteSettings> {
   const row = (await sql<{ value: SiteSettings }>('SELECT value FROM settings WHERE id=1')).rows[0]
   return { ...defaultSettings, ...row?.value }
+}
+export async function allProjects(): Promise<Project[]> {
+  return (
+    (await sql<{ value: Project[] }>('SELECT value FROM portfolio WHERE id=1')).rows[0]?.value || []
+  )
 }
 export async function allPosts(): Promise<Post[]> {
   return (

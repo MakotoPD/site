@@ -8,6 +8,7 @@ const privateSeoPaths = [
   '/api/admin/',
   '/api/leads',
   '/api/posts/',
+  '/api/projects',
   '/api/settings',
   '/api/__sitemap__/',
 ]

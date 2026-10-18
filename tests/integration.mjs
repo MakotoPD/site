@@ -440,6 +440,26 @@ try {
   )
   assert.deepEqual([stored.format, stored.width, stored.height], ['webp', sent.width, sent.height])
   assert.equal(stored.exif, undefined)
+  // Portfolio is edited as one list; an image used by a project becomes public.
+  const portfolio = (await request('/api/projects', 'GET', undefined, false)).data
+  assert.equal(portfolio[0].slug, 'spectra')
+  assert.equal((await request('/api/admin/projects', 'PUT', portfolio, false)).status, 401)
+  const work = [...portfolio, { ...portfolio[1], slug: 'integration-work', image: mediaURL }]
+  assert.equal((await request('/api/admin/projects', 'PUT', [...work, portfolio[0]])).status, 400)
+  assert.equal(
+    (await request('/api/admin/projects', 'PUT', [{ ...work[0], url: 'javascript:alert(1)' }]))
+      .status,
+    400,
+  )
+  assert.equal((await request('/api/admin/projects', 'PUT', work)).status, 200)
+  assert.equal((await fetch(origin + mediaURL)).status, 200)
+  assert.match((await request('/realizacje', 'GET', undefined, false)).data, /integration-work/)
+  assert.equal(
+    (await request('/work/integration-work', 'GET', undefined, false)).response.headers.get(
+      'location',
+    ),
+    '/realizacje/integration-work',
+  )
   assert.equal(
     (
       await request(`/api/admin/posts/${richPost.data.id}`, 'PUT', {

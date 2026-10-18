@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { projects } from '#shared/defaults'
 const root = ref<HTMLElement | null>(null)
 useMotion(root)
+const { data: projects } = await useFetch('/api/projects', { default: () => [] })
 const filter = ref('Wszystkie')
 const filtered = computed(() =>
-  projects.filter(
+  projects.value.filter(
     (p) =>
       filter.value === 'Wszystkie' ||
       (filter.value === 'Strony'

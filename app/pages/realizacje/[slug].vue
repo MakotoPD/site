@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { projects } from '#shared/defaults'
 import { siteOrigin } from '#shared/seo'
 const route = useRoute()
 const site = siteOrigin(useRuntimeConfig().public.siteUrl)
+const { data } = await useFetch('/api/projects', { default: () => [] })
+const projects = data.value
 const project = projects.find((p) => p.slug === route.params.slug)
 if (!project) throw createError({ statusCode: 404, statusMessage: 'Nie znaleziono projektu.' })
 const next = projects[(projects.findIndex((p) => p.slug === project.slug) + 1) % projects.length]!

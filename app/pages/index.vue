@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { projects } from '#shared/defaults'
 const root = ref<HTMLElement | null>(null)
 useMotion(root)
 const { settings } = await useSite()
 const { data: posts } = await useFetch('/api/posts', { default: () => [] })
+const { data: projects } = await useFetch('/api/projects', { default: () => [] })
 usePageSeo(
   'Strony internetowe i aplikacje w Inowrocławiu',
   'Makoto: autorskie strony internetowe w Inowrocławiu i Kujawsko-Pomorskiem. Projekt UI/UX, aplikacje, CMS i wycena. Zobacz realizacje Patryka Dąbrowskiego.',

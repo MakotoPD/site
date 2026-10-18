@@ -38,14 +38,7 @@ let automaticSlug = isNew.value
 watch(
   () => state.title,
   (title) => {
-    if (automaticSlug)
-      state.slug = title
-        .replace(/[łŁ]/g, 'l')
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-|-$/g, '')
+    if (automaticSlug) state.slug = slugify(title)
   },
 )
 watch(

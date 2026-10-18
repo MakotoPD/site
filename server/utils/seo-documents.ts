@@ -1,6 +1,5 @@
 import { locations, localPath } from '#shared/locations'
 import { servicePages, servicePath } from '#shared/services'
-import { projects } from '#shared/defaults'
 import { siteOrigin } from '#shared/seo'
 export interface SeoDocument {
   path: string
@@ -10,7 +9,11 @@ export interface SeoDocument {
   modified?: string
 }
 export async function seoDocuments(): Promise<SeoDocument[]> {
-  const [settings, records] = await Promise.all([getSettings(), allPosts()])
+  const [settings, records, projects] = await Promise.all([
+    getSettings(),
+    allPosts(),
+    allProjects(),
+  ])
   const posts = records.filter((post) => post.status === 'published')
   const site = siteOrigin(useRuntimeConfig().public.siteUrl)
   const contact = `Makoto — ${settings.name}\n\nKontakt: ${settings.email}${settings.phone ? `, ${settings.phone}` : ''}.\n\n${settings.streetAddress ? `Adres publiczny: ${settings.streetAddress}, ${settings.postalCode} ${settings.addressLocality}.\n\n` : ''}Obszar obsługi: Inowrocław, Toruń, Bydgoszcz, Grudziądz, Włocławek i całe województwo kujawsko-pomorskie.\n\nProjekty można prowadzić zdalnie. Sposób spotkania ustalamy wcześniej.\n\n${settings.googleMapsUrl ? `Profil Google: ${settings.googleMapsUrl}\n\n` : ''}`

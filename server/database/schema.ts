@@ -11,6 +11,7 @@ export function schemaDDL(value: string) {
   const schema = safeSchema(value)
   return `CREATE SCHEMA IF NOT EXISTS "${schema}";
     CREATE TABLE IF NOT EXISTS "${schema}".settings (id smallint PRIMARY KEY CHECK(id=1), value jsonb NOT NULL);
+    CREATE TABLE IF NOT EXISTS "${schema}".portfolio (id smallint PRIMARY KEY CHECK(id=1), value jsonb NOT NULL);
     CREATE TABLE IF NOT EXISTS "${schema}".posts (id uuid PRIMARY KEY, slug text NOT NULL UNIQUE, value jsonb NOT NULL);
     CREATE TABLE IF NOT EXISTS "${schema}".leads (id uuid PRIMARY KEY, value jsonb NOT NULL, created_at timestamptz NOT NULL);
     CREATE INDEX IF NOT EXISTS leads_created_at_idx ON "${schema}".leads(created_at DESC);

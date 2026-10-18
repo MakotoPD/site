@@ -6,6 +6,7 @@ const links = [
   { to: '/admin', label: 'Przegląd', icon: 'dashboard' as const },
   { to: '/admin/zgloszenia', label: 'Zgłoszenia', icon: 'inbox' as const },
   { to: '/admin/blog', label: 'Blog', icon: 'file' as const },
+  { to: '/admin/realizacje', label: 'Realizacje', icon: 'layers' as const },
   { to: '/admin/ustawienia', label: 'Ustawienia', icon: 'settings' as const },
 ]
 watch(
@@ -196,9 +197,11 @@ useHead({ meta: [{ name: 'robots', content: 'noindex, nofollow' }] })
                 ? 'Zgłoszenia'
                 : route.path.includes('/blog')
                   ? 'Blog'
-                  : route.path.includes('/ustawienia')
-                    ? 'Ustawienia'
-                    : 'Przegląd'
+                  : route.path.includes('/realizacje')
+                    ? 'Realizacje'
+                    : route.path.includes('/ustawienia')
+                      ? 'Ustawienia'
+                      : 'Przegląd'
             }}
           </strong>
         </span>

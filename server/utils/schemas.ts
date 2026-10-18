@@ -55,17 +55,35 @@ export const leadSchema = z.object({
   configuration: quoteSchema.optional(),
   brief: quoteBriefSchema.optional(),
 })
+const imagePath = z.string().regex(/^(?:|\/images\/[a-zA-Z0-9_.-]+|\/api\/media\/[a-f0-9-]+)$/)
+const slug = z
+  .string()
+  .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
+  .max(180)
+export const projectSchema = z.object({
+  slug,
+  title: z.string().trim().min(2).max(80),
+  category: z.string().trim().min(2).max(60),
+  description: z.string().trim().min(10).max(200),
+  detail: z.string().trim().min(10).max(2000),
+  image: imagePath,
+  color: z.string().regex(/^#[0-9a-fA-F]{6}$/),
+  technologies: z.array(z.string().trim().min(1).max(40)).max(12),
+  url: z
+    .string()
+    .trim()
+    .max(300)
+    .regex(/^(?:|https?:\/\/[^\s]+)$/)
+    .default(''),
+})
 export const postSchema = z.object({
   title: z.string().trim().min(3).max(180),
-  slug: z
-    .string()
-    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
-    .max(180),
+  slug,
   excerpt: z.string().trim().min(10).max(400),
   content: z.string().max(80000).default(''),
   document: z.unknown().optional(),
   category: z.string().trim().min(2).max(60),
-  cover: z.string().regex(/^(?:|\/images\/[a-zA-Z0-9_.-]+|\/api\/media\/[a-f0-9-]+)$/),
+  cover: imagePath,
   status: z.enum(['draft', 'published']),
 })
 export function validate<T>(schema: z.ZodType<T>, value: unknown): T {
