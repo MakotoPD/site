@@ -19,7 +19,10 @@ const search = ref(''),
   })
 // Reka only catches Enter while an option is highlighted; otherwise Enter submits the form.
 const root = useTemplateRef<{ highlightFirstItem?: () => void }>('root')
-watch(search, () => nextTick(() => root.value?.highlightFirstItem?.()))
+watch(
+  search,
+  (value) => value !== model.value && nextTick(() => root.value?.highlightFirstItem?.()),
+)
 </script>
 <template>
   <ComboboxRoot
