@@ -38,6 +38,10 @@ export default defineNuxtConfig({
       { userAgent: ['OAI-SearchBot', 'PerplexityBot'], allow: ['/'], disallow: privateSeoPaths },
     ],
     mergeWithRobotsTxtPath: false,
+    // The module bakes a site-wide noindex header when the build runs without
+    // NUXT_PUBLIC_INDEXABLE, which then sticks to redirects and images. The runtime
+    // header comes from server/middleware/security.ts instead.
+    header: false,
   },
   sitemap: {
     sources: ['/api/__sitemap__/urls'],

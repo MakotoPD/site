@@ -74,3 +74,7 @@ knownRedirects['/pl/kontakt'] = '/kontakt'
 knownRedirects['/faq'] = '/pytania'
 knownRedirects['/pl/faq'] = '/pytania'
 knownRedirects['/blog/introducing-denalify'] = '/blog/przedstawiam-denalify'
+// Pages of the previous site without a direct successor point to the closest current page.
+knownRedirects['/links'] = knownRedirects['/pl/links'] = '/kontakt'
+knownRedirects['/uses'] = knownRedirects['/pl/uses'] = '/o-mnie'
+knownRedirects['/rules'] = knownRedirects['/pl/rules'] = '/prywatnosc'
