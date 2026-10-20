@@ -2,7 +2,7 @@
 const root = ref<HTMLElement | null>(null)
 useMotion(root)
 usePageSeo(
-  'O mnie',
+  'O mnie: Patryk Dąbrowski, projektant i programista',
   'Patryk Dąbrowski — Makoto. Projektant i programista łączący design z technologią. Poznaj mój sposób pracy.',
 )
 </script>

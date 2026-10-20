@@ -6,7 +6,7 @@ const filtered = computed(() =>
   posts.value.filter((p) => filter.value === 'Wszystkie' || p.category === filter.value),
 )
 usePageSeo(
-  'Blog',
+  'Blog o stronach internetowych i designie',
   'Design, Nuxt i cyfrowe produkty. Zajrzyj do warsztatu Makoto i poznaj sposób tworzenia autorskich stron i aplikacji.',
 )
 const root = ref<HTMLElement | null>(null)

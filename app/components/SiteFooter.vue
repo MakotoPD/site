@@ -210,6 +210,7 @@ const { openSettings } = useCookieConsent()
           <NuxtLink
             to="/admin"
             external
+            rel="nofollow"
           >
             Panel
           </NuxtLink>

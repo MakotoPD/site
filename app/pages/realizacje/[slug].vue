@@ -7,7 +7,11 @@ if (error.value || !data.value)
   throw createError({ statusCode: 404, statusMessage: 'Nie znaleziono projektu.' })
 const project = data.value,
   next = project.next
-usePageSeo(project.title, project.description)
+// The tagline alone is too short for search results; the longer summary fits unless it is an essay.
+usePageSeo(
+  `${project.title} — ${project.category}`,
+  (project.detail.length <= 200 && project.detail) || project.description,
+)
 useStructuredData('makoto-project', () => ({
   '@context': 'https://schema.org',
   '@type': 'CreativeWork',
@@ -68,14 +72,12 @@ useMotion(root)
       >
         {{ project.category }}
       </p>
-      <h1 data-hero="2">
+      <!-- The dot is drawn with CSS so the heading text stays "Title." without a space. -->
+      <h1
+        data-hero="2"
+        class="after:text-primary after:content-['.']"
+      >
         {{ project.title }}
-        <span
-          data-ui="blue"
-          class="text-primary"
-        >
-          .
-        </span>
       </h1>
       <p data-hero="3">{{ project.description }}</p>
     </header>

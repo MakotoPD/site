@@ -13,7 +13,7 @@ const filtered = computed(() =>
   ),
 )
 usePageSeo(
-  'Realizacje',
+  'Realizacje: strony internetowe i aplikacje',
   'Zobacz wybrane strony internetowe i aplikacje Makoto. Każdy projekt to autorski design i przemyślany kod.',
 )
 </script>

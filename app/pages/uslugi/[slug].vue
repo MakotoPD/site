@@ -80,14 +80,15 @@ useMotion(root)
         text="Usługi / Kujawsko-Pomorskie"
         data-hero="0"
       />
-      <h1 data-hero="1">
+      <!-- The dot is drawn with CSS so the heading text stays "Title." without a space. -->
+      <h1
+        data-hero="1"
+        class="
+          after:font-serif after:font-normal after:tracking-[-0.025em] after:text-primary
+          after:italic after:content-['.']
+        "
+      >
         {{ service.title }}
-        <span
-          data-ui="serif blue"
-          class="font-serif font-normal tracking-[-0.025em] text-primary italic"
-        >
-          .
-        </span>
       </h1>
       <p data-hero="2">{{ service.lead }}</p>
       <div
