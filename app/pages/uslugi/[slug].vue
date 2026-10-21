@@ -131,6 +131,25 @@ useMotion(root)
         </NuxtLink>
       </div>
     </header>
+    <section
+      v-if="service.slug === 'seo-techniczne'"
+      class="mb-14 rounded-card border border-solid border-line bg-surface p-7 max-[760px]:p-5"
+      aria-label="SEO lokalne Inowrocław"
+    >
+      <h2 class="mb-4 text-[clamp(24px,3vw,34px)]">Pozycjonowanie lokalne w Inowrocławiu</h2>
+      <p class="mb-5 max-w-[760px] text-[13px] leading-[1.8] text-muted">
+        Jeśli strona pojawia się na lokalne zapytania, ale nie zdobywa kliknięć,
+        warto sprawdzić jej prezentację w wynikach i dopasowanie treści do potrzeb klientów.
+        Analizuję dane Search Console, strukturę oferty i techniczne przeszkody, a następnie
+        proponuję zmiany oraz sposób pomiaru ich skuteczności.
+      </p>
+      <div class="flex flex-wrap gap-5 text-[12px]">
+        <NuxtLink class="text-primary underline" to="/kontakt">Zapytaj o analizę strony</NuxtLink>
+        <NuxtLink class="text-primary underline" to="/strony-internetowe/inowroclaw">
+          Tworzenie stron internetowych w Inowrocławiu
+        </NuxtLink>
+      </div>
+    </section>
     <ServiceOutcomes :service="service" />
     <section
       v-for="section in service.sections"
