@@ -230,16 +230,16 @@ export const servicePages: ServicePage[] = [
   {
     slug: 'seo-techniczne',
     name: 'SEO techniczne i GEO',
-    title: 'SEO techniczne i GEO dla stron',
+    title: 'Pozycjonowanie stron Inowrocław – SEO techniczne i lokalne',
     description:
-      'SEO techniczne i przygotowanie treści dla wyszukiwarek AI. Makoto: indeksowanie, dane firmy, schema i migracje stron w Kujawsko-Pomorskiem.',
-    lead: 'Pomagam uporządkować techniczne SEO oraz treści potrzebne do zrozumienia strony przez wyszukiwarki i systemy AI. Sprawdzam dostępność HTML, adresy, indeksowanie, dane strukturalne i zgodność informacji o firmie.',
+      'Pozycjonowanie stron Inowrocław: audyt SEO, indeksowanie, optymalizacja treści i lokalna widoczność. Poznaj zakres prac Makoto i zapytaj o wycenę.',
+    lead: 'Pomagam firmom z Inowrocławia i regionu poprawić techniczne i lokalne SEO. Sprawdzam indeksowanie, opisy usług, strukturę adresów, dane firmy oraz zapytania w Google Search Console. Zakres prac opiera się na stanie witryny i celach biznesowych, bez obietnic konkretnych pozycji.',
     sections: [
       {
-        title: 'Co obejmuje optymalizacja techniczna?',
+        title: 'Co obejmuje pozycjonowanie stron w Inowrocławiu?',
         paragraphs: [
-          'Sprawdzamy, które strony powinny być indeksowane i czy roboty otrzymują ich właściwą treść. Porządkuję metadane, canonical, przekierowania i mapę witryny. Panel administratora, dane zgłoszeń oraz szkice pozostają poza publicznym indeksem.',
-          'W lokalnym SEO ważna jest zgodność nazwy, adresu i telefonu z rzeczywistą działalnością. Dane strukturalne powinny odzwierciedlać widoczne informacje, a podstrony miast przedstawiać odrębne, przydatne materiały. Rozbudowa serwisu ma wspierać decyzję klienta, nie tylko zwiększać liczbę adresów.',
+          'Zaczynam od audytu witryny i zapytań, na które już wyświetla się w Google. Sprawdzam indeksowanie, widoczność treści dla robotów, tytuły i opisy stron, adresy kanoniczne, przekierowania i mapę witryny. Panel administratora, dane zgłoszeń i szkice pozostają poza publicznym indeksem.',
+          'Dla firm z Inowrocławia ważne są opisy usług odpowiadające na pytania klientów, czytelny kontakt i spójne dane w witrynie oraz Profilu Firmy w Google. Przygotowuję plan działań i pomiaru ich efektów; edycję wizytówki uzgadniamy osobno. Nie tworzę fikcyjnych lokalizacji ani masowych kopii podstron miast.',
         ],
         items: [
           'Przegląd indeksowania, metadanych i przekierowań.',
