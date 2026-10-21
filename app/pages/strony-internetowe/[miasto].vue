@@ -76,7 +76,7 @@ useMotion(root)
         data-hero="0"
       />
       <h1 data-hero="1">
-        Strony internetowe
+        Tworzenie stron internetowych
         <br />
         <span
           data-ui="serif blue"
@@ -86,6 +86,13 @@ useMotion(root)
         </span>
       </h1>
       <p data-hero="2">{{ city.lead }}</p>
+      <p v-if="city.slug === 'inowroclaw'" class="text-[12px] text-muted">
+        Tworzę strony dla lokalnych firm: czytelna oferta, edycja treści i podstawy SEO.
+        Masz już witrynę? Możemy zacząć od analizy jej widoczności.
+        <NuxtLink class="text-primary underline" to="/uslugi/seo-techniczne">
+          Sprawdź pozycjonowanie stron w Inowrocławiu.
+        </NuxtLink>
+      </p>
       <div
         data-ui="local-heading-actions"
         class="
