@@ -22,7 +22,7 @@ export const locations: LocationPage[] = [
     slug: 'inowroclaw',
     name: 'Inowrocław',
     genitive: 'Inowrocławia',
-    title: 'Strony internetowe Inowrocław',
+    title: 'Strony internetowe Inowrocław – tworzenie stron WWW',
     description:
       'Autorskie strony internetowe w Inowrocławiu. Makoto: projekt UI/UX, Nuxt, blog i wdrożenie. Sprawdź zakres, realizacje i orientacyjną wycenę.',
     kicker: 'Blisko Twojej firmy. Od pierwszej rozmowy.',
@@ -83,9 +83,9 @@ export const locations: LocationPage[] = [
     slug: 'torun',
     name: 'Toruń',
     genitive: 'Torunia',
-    title: 'Strony internetowe Toruń',
+    title: 'Tworzenie stron internetowych Toruń – projekt i wycena',
     description:
-      'Projektowanie stron internetowych dla firm z Torunia. Autorski design, wersje językowe, CMS i formularze. Zobacz proces i wyceń projekt z Makoto.',
+      'Tworzenie stron WWW Toruń: autorski projekt, responsywność, CMS i formularze. Poznaj proces, portfolio i możliwość wyceny w Makoto.',
     kicker: 'Twoja oferta, dla mieszkańców i odwiedzających.',
     lead: 'Tworzę strony internetowe dla firm i organizacji z Torunia. Projekt może obejmować prezentację usług, ofertę dla odwiedzających miasto, wydarzenia albo sklep. Zaczynam od odbiorców i treści, a następnie projektuję oraz wdrażam serwis.',
     introduction: [
@@ -144,9 +144,9 @@ export const locations: LocationPage[] = [
     slug: 'bydgoszcz',
     name: 'Bydgoszcz',
     genitive: 'Bydgoszczy',
-    title: 'Strony internetowe Bydgoszcz',
+    title: 'Tworzenie stron internetowych Bydgoszcz – strony WWW',
     description:
-      'Strony internetowe dla firm z Bydgoszczy: serwisy B2B, katalogi usług i integracje. Makoto łączy projekt interfejsu z wdrożeniem. Sprawdź wycenę.',
+      'Strony internetowe Bydgoszcz: tworzenie serwisów firmowych, CMS, katalogów B2B i formularzy. Poznaj zakres, proces i wycenę w Makoto.',
     kicker: 'Czytelna oferta. Sprawniejsza obsługa zapytań.',
     lead: 'Projektuję strony internetowe dla firm z Bydgoszczy, które chcą jasno przedstawić ofertę i usprawnić kontakt z klientem. Serwis może łączyć usługi, realizacje, materiały do pobrania oraz formularz dopasowany do procesu sprzedaży.',
     introduction: [
