@@ -248,7 +248,13 @@ const services = [
           [&_[data-ui~='text-link']]:text-[#c6d9ec]
         "
       >
-        <span>Pomysł. Forma. Działający projekt.</span>
+        <span>
+          Pomysł. Forma. Działający projekt. Także
+          <NuxtLink
+            class="text-primary underline"
+            to="/uslugi/seo-techniczne"
+          >pozycjonowanie stron Inowrocław</NuxtLink>.
+        </span>
         <NuxtLink
           to="/uslugi"
           data-ui="text-link"

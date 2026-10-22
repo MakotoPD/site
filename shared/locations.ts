@@ -24,7 +24,7 @@ export const locations: LocationPage[] = [
     genitive: 'Inowrocławia',
     title: 'Strony internetowe Inowrocław – tworzenie stron WWW',
     description:
-      'Autorskie strony internetowe w Inowrocławiu. Makoto: projekt UI/UX, Nuxt, blog i wdrożenie. Sprawdź zakres, realizacje i orientacyjną wycenę.',
+      'Strony internetowe Inowrocław: autorski projekt UI/UX, Nuxt, blog i wdrożenie. Sprawdź zakres, realizacje i orientacyjną wycenę w Makoto.',
     kicker: 'Blisko Twojej firmy. Od pierwszej rozmowy.',
     lead: 'Projektuję strony internetowe dla firm z Inowrocławia: od czytelnej oferty usług po serwis z blogiem i formularzami. Pod marką Makoto pracuję jako Patryk Dąbrowski, łącząc projektowanie interfejsu z wdrożeniem w Nuxt.',
     introduction: [
@@ -83,9 +83,9 @@ export const locations: LocationPage[] = [
     slug: 'torun',
     name: 'Toruń',
     genitive: 'Torunia',
-    title: 'Tworzenie stron internetowych Toruń – projekt i wycena',
+    title: 'Strony internetowe Toruń – tworzenie stron WWW',
     description:
-      'Tworzenie stron WWW Toruń: autorski projekt, responsywność, CMS i formularze. Poznaj proces, portfolio i możliwość wyceny w Makoto.',
+      'Strony internetowe Toruń: autorski projekt, responsywność, CMS i formularze. Poznaj proces, portfolio i możliwość wyceny w Makoto.',
     kicker: 'Twoja oferta, dla mieszkańców i odwiedzających.',
     lead: 'Tworzę strony internetowe dla firm i organizacji z Torunia. Projekt może obejmować prezentację usług, ofertę dla odwiedzających miasto, wydarzenia albo sklep. Zaczynam od odbiorców i treści, a następnie projektuję oraz wdrażam serwis.',
     introduction: [
@@ -144,7 +144,7 @@ export const locations: LocationPage[] = [
     slug: 'bydgoszcz',
     name: 'Bydgoszcz',
     genitive: 'Bydgoszczy',
-    title: 'Tworzenie stron internetowych Bydgoszcz – strony WWW',
+    title: 'Strony internetowe Bydgoszcz – tworzenie stron WWW',
     description:
       'Strony internetowe Bydgoszcz: tworzenie serwisów firmowych, CMS, katalogów B2B i formularzy. Poznaj zakres, proces i wycenę w Makoto.',
     kicker: 'Czytelna oferta. Sprawniejsza obsługa zapytań.',
@@ -205,9 +205,9 @@ export const locations: LocationPage[] = [
     slug: 'grudziadz',
     name: 'Grudziądz',
     genitive: 'Grudziądza',
-    title: 'Strony internetowe Grudziądz',
+    title: 'Strony internetowe Grudziądz – tworzenie stron WWW',
     description:
-      'Tworzenie stron internetowych dla firm z Grudziądza. Od zapytań o usługę po ofertę wydarzeń i sklep. Poznaj zakres, proces współpracy i wycenę Makoto.',
+      'Strony internetowe Grudziądz: tworzenie stron dla firm, od zapytań o usługę po ofertę wydarzeń i sklep. Poznaj zakres, proces i wycenę Makoto.',
     kicker: 'Od lokalnej usługi do własnego kanału sprzedaży.',
     lead: 'Tworzę strony dla firm i organizacji z Grudziądza, które chcą uporządkować ofertę, zbierać lepsze zapytania albo rozwijać własny kanał sprzedaży. Projekt obejmuje autorski interfejs, wdrożenie i sprawdzenie działania na urządzeniach mobilnych.',
     introduction: [
@@ -266,9 +266,9 @@ export const locations: LocationPage[] = [
     slug: 'wloclawek',
     name: 'Włocławek',
     genitive: 'Włocławka',
-    title: 'Strony internetowe Włocławek',
+    title: 'Strony internetowe Włocławek – tworzenie stron WWW',
     description:
-      'Nowe strony i przebudowa serwisów firm z Włocławka. Makoto: oferta, katalog, CMS i bezpieczne przeniesienie treści. Zobacz proces i sprawdź budżet.',
+      'Strony internetowe Włocławek: nowe strony i przebudowa serwisów firm. Oferta, katalog, CMS i bezpieczne przeniesienie treści. Sprawdź budżet.',
     kicker: 'Nowy wizerunek. Uporządkowane treści.',
     lead: 'Projektuję nowe strony i przebudowuję serwisy firm z Włocławka. Pomagam ułożyć ofertę, przygotować czytelny interfejs oraz przenieść potrzebne treści do nowego wdrożenia. Najważniejszy jest cel strony i sposób korzystania z niej przez klienta.',
     introduction: [
